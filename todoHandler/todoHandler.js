@@ -14,7 +14,11 @@ router.get("/", async (req, res) => {
 });
 
 //get a todo
-router.get("/:id", async (req, res) => {});
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  const todo =  await Todo.find({_id: id});
+  res.status(200).json({data: todo})
+});
 
 // post a todo
 router.post("/", async (req, res) => {
@@ -45,6 +49,10 @@ router.put("/:id", async (req, res) => {
 });
 
 // delete a todo
-router.delete("/:id", async (req, res) => {});
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+  const result = await Todo.deleteOne({_id: id});
+  res.status(200).json({data: result});
+});
 
 module.exports = router;
